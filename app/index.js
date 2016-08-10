@@ -10,8 +10,7 @@ webApp.use(session({
   },
   name: "expressApp.sid",
   store: new RedisStore({
-    host: '[docke-machine ip]',
-    port: '[docker container port]'
+    host: '[docker container name or alias]'
   }),
   resave: false,
   saveUninitialized: false,
