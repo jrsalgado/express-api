@@ -1,13 +1,17 @@
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
-var mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost:27017/todos');
+// var session = require("express-session");
+// var RedisStore = require("connect-redis")(session);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use('/api/todo', require('./routes/api/todo'));
+// WEBAPP
+app.use('/', require('./app'))
+
+// API
+app.use('/api', require('./api'))
 
 app.listen(3000);

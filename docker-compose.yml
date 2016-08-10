@@ -1,0 +1,24 @@
+version: '2'
+
+services:
+  node:
+    image: node:0.12
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ./:/usr/src/app
+    working_dir: /usr/src/app
+    depends_on:
+      - mongo
+      - redis
+    links:
+      - mongo:db
+      - redis:cache
+    command: npm run development
+  mongo:
+    image: mongo:3.0
+  redis:
+    image: redis:3.0
+      
