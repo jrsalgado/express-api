@@ -10,7 +10,7 @@ webApp.use(session({
   },
   name: "expressApp.sid",
   store: new RedisStore({
-    host: 'cache'
+    host: 'localhost'
   }),
   resave: false,
   saveUninitialized: false,
