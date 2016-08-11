@@ -8,10 +8,10 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// WEBAPP
-app.use('/', require('./app'))
-
 // API
 app.use('/api', require('./api'))
+
+// WEBAPP
+app.use('/', require('./app'))
 
 app.listen(3000);

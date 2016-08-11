@@ -1,0 +1,23 @@
+version: '2'
+
+services:
+  node:
+    build:
+      context: .
+      dockerfile: Dockerfile.node
+    ports:
+      - "3001:3000"
+    depends_on:
+      - mongo
+      - redis
+    links:
+      - mongo:db
+      - redis:cache
+    command: npm run development
+  mongo:
+    build:
+      context: .
+      dockerfile: Dockerfile.mongo
+  redis:
+    image: redis:3.0
+      

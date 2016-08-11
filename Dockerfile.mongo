@@ -1,0 +1,5 @@
+FROM mongo:3.0
+MAINTAINER El jayro
+COPY ./tools/seed.js /tools/seed.js
+EXPOSE 27017
+CMD ["mongod"]
