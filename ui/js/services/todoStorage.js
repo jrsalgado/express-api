@@ -55,7 +55,7 @@ angular.module('todomvc')
 
 				store.todos.splice(store.todos.indexOf(todo), 1);
 				console.log(store.todos,store.todos.indexOf(todo))
-				return store.api.delete({ id: todo._id },
+				return store.api.delete({ id: todo.id },
 					function () {
 					}, function error() {
 						angular.copy(originalTodos, store.todos);
@@ -73,7 +73,7 @@ angular.module('todomvc')
 
 				return store.api.save(todo,
 					function success(resp) {
-						todo._id = resp._id;
+						todo.id = resp.id;
 						store.todos.push(todo);
 					}, function error() {
 						angular.copy(originalTodos, store.todos);
@@ -82,7 +82,7 @@ angular.module('todomvc')
 			},
 
 			put: function (todo) {
-				return store.api.update({ id: todo._id }, todo)
+				return store.api.update({ id: todo.id }, todo)
 					.$promise;
 			}
 		};
@@ -93,17 +93,17 @@ angular.module('todomvc')
 	.factory('localStorage', function ($q) {
 		'use strict';
 
-		var STORAGE_ID = 'todos-angularjs';
+		var STORAGEid = 'todos-angularjs';
 
 		var store = {
 			todos: [],
 
 			_getFromLocalStorage: function () {
-				return JSON.parse(localStorage.getItem(STORAGE_ID) || '[]');
+				return JSON.parse(localStorage.getItem(STORAGEid) || '[]');
 			},
 
 			_saveToLocalStorage: function (todos) {
-				localStorage.setItem(STORAGE_ID, JSON.stringify(todos));
+				localStorage.setItem(STORAGEid, JSON.stringify(todos));
 			},
 
 			clearCompleted: function () {

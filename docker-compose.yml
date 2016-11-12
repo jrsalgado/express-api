@@ -11,14 +11,19 @@ services:
       - ./:/usr/src/app
     working_dir: /usr/src/app
     depends_on:
-      - mongo
+      - pgsql
       - redis
     links:
-      - mongo:db
+      - pgsql:db
       - redis:cache
-    command: npm run development
-  mongo:
-    image: mongo:3.0
+    command: /bin/bash -c "npm install && npm install -g knex nodemon && npm run development"
+  pgsql:
+    image: postgres:9.4
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=todolist
+      - POSTGRES_PASSWORD=todolist
+      - POSTGRES_DB=todolist
   redis:
     image: redis:3.0
-      

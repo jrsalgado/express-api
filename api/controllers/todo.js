@@ -19,26 +19,24 @@ module.exports ={
 
 
 function deleteById(req, res) {
-   Todo.remove({_id: req.params.id }, function(err, t){
+  var id = req.params.id;
 
-     if(t.ok){
-       res.status(200).json({todo:req.params.id, deleted: true });
-     }
-     if(t.result.n == 0){
-       res.status(404).send();
-     }
-   });
+  new Todo({ id: id })
+    .destroy()
+    .then(function (result) {
+      res.json(result)
+    })
 }
 
 function updateById(req, res) {
-   Todo.update({_id: req.params.id }, req.body ,function(err, t){
-     if(t.ok){
-     res.status(200).json(req.body);
-    }
-   });
-
+  var id = req.params.id;
+  var completed = req.body.completed;
+  new Todo({ id: id })
+    .save({ completed: completed }, { patch: true })
+    .then(function (result) {
+      res.json(result)
+    })
 }
-
 
 
 function getById(req, res){
@@ -52,18 +50,30 @@ function getById(req, res){
 }
 
 
-function create(req, res){
-   var todo = new Todo(req.body);
-   todo.save(function(err, t){
-     res.status(200).json(t);
-   });
+function create(req, res) {
+  var title = req.body.title;
+  var completed = req.body.completed;
+  var categories_id = 1;
+
+  Todo.forge({
+    title: title,
+    completed: completed,
+    categories_id: categories_id
+  })
+    .save()
+    .then(function (result) {
+      res.json(result)
+    })
 }
 
 
-function all(req, res){
-  Todo.find({}, function(err, todos){
-   if(!err){
-     res.status(200).json(todos)
-   }
-  });
+function all(req, res) {
+  Todo
+    .where({ 'categories_id': 1 })
+    .orderBy('id','ASC')
+    .fetchAll({withRelated:['categories']})
+    .then(function (result) {
+      console.log(result.toJSON())
+      res.json(result)
+    })
 }

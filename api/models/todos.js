@@ -1,12 +1,10 @@
-var mongoose = require('mongoose');
 
-var todoSchema = new mongoose.Schema({
- title: String,
- desc: String,
- when: Date,
- completed: Boolean
-});
+var bookshelf = require('../orm');
+var categories = require('./categories');
 
-var Todo = mongoose.model('todo',todoSchema);
-
-module.exports = Todo;
+module.exports = bookshelf.Model.extend({
+  tableName: 'todos',
+  categories: function () {
+    return this.belongsTo(categories, 'categories_id')
+  }
+})
