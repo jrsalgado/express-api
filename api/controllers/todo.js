@@ -18,9 +18,9 @@ module.exports ={
 }
 
 
-function deleteById(req, res){
+function deleteById(req, res) {
    Todo.remove({_id: req.params.id }, function(err, t){
-     
+
      if(t.ok){
        res.status(200).json({todo:req.params.id, deleted: true });
      }
@@ -30,23 +30,22 @@ function deleteById(req, res){
    });
 }
 
-function updateById(req, res){
-  
+function updateById(req, res) {
    Todo.update({_id: req.params.id }, req.body ,function(err, t){
      if(t.ok){
      res.status(200).json(req.body);
     }
    });
-   
+
 }
 
 
 
 function getById(req, res){
-  
+
   Todo.findOne({_id:req.params.id}, function(err, todo){
    if(!err){
-     
+
      res.status(200).json(todo)
    }
   });

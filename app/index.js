@@ -23,7 +23,8 @@ webApp
   .get('/login',function(req, res){
     res.sendFile(__dirname+'/views/login.html')
   })
-  .post('/login', function(req, res){
+  .post('/login', function (req, res) {
+    // TODO: tarea para nodeschool
     var email = req.body.email
     var password = req.body.password
     req.session.auth = {

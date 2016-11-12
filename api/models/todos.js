@@ -4,7 +4,7 @@ var todoSchema = new mongoose.Schema({
  title: String,
  desc: String,
  when: Date,
- done: Boolean
+ completed: Boolean
 });
 
 var Todo = mongoose.model('todo',todoSchema);

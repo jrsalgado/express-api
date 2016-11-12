@@ -3,14 +3,13 @@ var todoCtrls = require('../controllers/todo')
 
 router.route('/')
   .get(todoCtrls.all)
-  .post(todoCtrls.create);
+  .post(todoCtrls.create)
 
 router.route('/:id')
   .get(todoCtrls.getById)
-  .put(todoCtrls.updateById)
   .delete(todoCtrls.deleteById)
-  .patch(todoCtrls.toggleDone);
-
+  .patch(todoCtrls.toggleDone)
+  .put(todoCtrls.updateById)
 
 
 module.exports = router;

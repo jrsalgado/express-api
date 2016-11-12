@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "prestart": "npm install",
+    "presdevelopment": "npm install",
     "start": "node index.js",
     "development": "./node_modules/nodemon/bin/nodemon.js -L index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
